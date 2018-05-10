@@ -1,0 +1,23 @@
+body, html, canvas {
+  background-color: #000;
+}
+
+body, html {
+  height: 100%;
+  display: grid;
+}
+
+canvas {
+  margin: auto;
+  border-radius: 50vh;
+  
+  animation-name: spin;
+  animation-duration: 50000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  
+}
+@keyframes spin {
+    from {transform:rotate(359deg);}
+    to {transform:rotate(0deg);}
+}
