@@ -1,11 +1,24 @@
-const SPEED = 0.0009;
+const SPEED = 0.001;
 const SIZE = 1000;
-const LIGHTNESS = '60%';
-const COLOR_START = 150;
-const COLOR_END = 250;
 
-let canvas = document.querySelector('canvas');
-let c = canvas.getContext('2d');
+const SATURATION = 50;
+const LIGHTNESS = 60;
+const COLOR_START = 150;
+const COLOR_END = 300;
+
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
+
+function resizeCanvas() {
+  let body = document.querySelector('body');
+  let w = window.getComputedStyle(body).getPropertyValue('width');
+  let h =     window.getComputedStyle(body).getPropertyValue('height');
+  canvas.width = parseInt(h, 10);
+  canvas.height = parseInt(h, 10);
+}
+resizeCanvas();
+
+canvas.addEventListener("resize", resizeCanvas);
 
 canvas.addEventListener("click", e => {
   c.clearRect(0, 0, canvas.width, canvas.height);
@@ -13,36 +26,44 @@ canvas.addEventListener("click", e => {
 
 function penDown(x, y, t) {  
   c.beginPath();
-  c.moveTo(x - Math.sin(t), y - Math.cos(t));
-  
-  c.quadraticCurveTo(x*Math.sin(Math.PI*t), y*Math.cos(Math.PI*t),canvas.height -x ,canvas.height - y);
+  c.moveTo(x, y);
+  c.quadraticCurveTo(x*Math.sin(.5*Math.PI*t), y*Math.cos(Math.PI*t), canvas.width -x, canvas.height - y);
   c.stroke();
 }
 
-let color = COLOR_START;
-let direction = true;
-function strobe(){
-  let co = (direction)?color++:color--;
-  c.strokeStyle = generateColor(co, '50%', LIGHTNESS, 100/co);
-  
-  if (color <= COLOR_START || color >= COLOR_END) direction = !direction;
+function fadeOut(color) {
+  c.fillStyle = generateColor(0, 0, 0, .05);
+  c.fillRect(0, 0, canvas.width, canvas.height);
 }
-
-function generateColor(h, s, l, a){
-  return `hsla(${h}, ${s}, ${l}, ${a})`
-}
-
-setInterval(function() { strobe() }, 10);
 
 let date = new Date();
 function mainLoop() {
   let t = new Date().getTime() * SPEED;
   
-  let center = canvas.width/2;
-  
-  penDown(center + Math.sin(t) * SIZE, center + Math.cos(t) * SIZE, t);
+  penDown(canvas.width + Math.sin(t) * SIZE, canvas.height + Math.cos(t) * SIZE, t);
   
   window.requestAnimationFrame(mainLoop);
 }
 
 mainLoop();
+
+let color = COLOR_START;
+let direction = true;
+function strobe(){
+  let co = (direction)?color++:color--;
+  c.strokeStyle = generateColor(co, SATURATION, LIGHTNESS, 100/co);
+  // c.shadowColor = generateColor(co, SATURATION, 70, .5);
+  // c.shadowBlur = 0;
+  // c.shadowOffsetX = 0;
+  // c.shadowOffsetY = 0;
+  
+  if (color <= COLOR_START || color >= COLOR_END) direction = !direction;
+}
+
+function generateColor(h=0, s=SATURATION, l=LIGHTNESS, a=1.0){
+  return `hsla(${h}, ${s}%, ${l}%, ${a})`
+}
+
+setInterval(function() { strobe() }, 100/(COLOR_END+COLOR_START));
+
+setInterval(function() { fadeOut(color) }, 100)

@@ -1,13 +1,8 @@
 body, html, canvas {
   background-color: #000;
-  height: 100%;
-  display: grid;
 }
 
 canvas {
-  margin: auto;
-  border-radius: 500px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin: 0;
+  border-radius: 50vh;
 }

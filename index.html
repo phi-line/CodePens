@@ -1,3 +1,39 @@
-<html>
-meow
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="OwlAPI">
+    <title>sketchbook</title>
+
+    <!-- https://bulma.io/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+
+    <!-- https://fontawesome.com/ -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- https://zerodevx.github.io/zero-md/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-loader.js"></script>
+    <link rel="import" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/build/zero-md.html">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/markdown-themes/default.css">
+
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div class="columns">
+      <div class="column is-6-tablet">
+        <div class="container">
+          <zero-md file="readme.md"><div class="md-html"></div></zero-md>
+        </div>
+      </div>
+      <div class="column">
+        <div class="embed-container is-hidden-mobile">
+          <object data="QuadraticMesh/index.html"></object>
+        </div>
+      </div>
+    </div>
+  <body>
 </html>

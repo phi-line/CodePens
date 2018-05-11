@@ -1,0 +1,33 @@
+body, html {
+  background-color: #000;
+  /* height: 100%; */
+  overflow: hidden;
+}
+
+.embed-container {
+  background-color: #000;
+  margin: -2em, -2em, 0, 0;
+  width: 100%;
+  height: 100vh;
+  /* overflow:hidden; */
+  position:relative;
+}
+
+.embed-container object{
+  padding: 1vw;
+  /* overflow:hidden; */
+  height:50vw !important;
+  width:50vw !important;
+}
+
+.md-html {
+  color: #ddd;
+  min-width: 200px;
+  max-width: 790px;
+  margin: 10px auto 0 auto;
+  padding: 20px;
+}
+
+.md-html h1 {
+  border-bottom: none;
+}
